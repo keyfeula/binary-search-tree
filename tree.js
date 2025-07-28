@@ -16,7 +16,32 @@ export function createTree(array) {
         return root;
     }
 
+    function insert(value, node = root) {
+          if (value < node.data && node.left === null) {
+            node.left = createNode(value);
+            return true;
+          }
+          else if (value > node.data && node.right === null) {
+            node.right = createNode(value);
+            return true;
+          }
+          else if (value < node.data && node.left !== null) {
+            insert(value, node.left);
+          }
+          else {
+            if (value === node.data) {
+                return false;
+            }
+            insert(value, node.right);
+          }
+    }
+
+    function printTree() {
+        console.log(root);
+    }
+
     return {
-        root,
+        printTree,
+        insert,
     }
 }
