@@ -50,6 +50,18 @@ export function createTree(array) {
         return node;
     }
 
+    function find(value, node = root) {
+      if (node === null || node.data === value) {
+        return node;
+      }
+      if (value < node.data) {
+        return find(value, node.left);
+      }
+      if (value > node.data) {
+        return find(value, node.right);
+      }
+    }
+
     const printTree = (node = root, prefix = '', isLeft = true) => {
       if (node === null) {
         return;
@@ -64,8 +76,9 @@ export function createTree(array) {
 };
 
     return {
-        printTree,
         insert,
         deleteItem,
+        find,
+        printTree,
     }
 }
