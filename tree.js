@@ -62,6 +62,24 @@ export function createTree(array) {
       }
     }
 
+    function levelOrderForEach(callback = null, queue = [root]) {
+      if (callback === null) {
+        return;
+      }
+      if (queue.length === 0) {
+        return;
+      }
+      let node = queue.shift();
+      if (node.left !== null) {
+        queue.push(node.left);
+      }
+      if (node.right !== null) {
+        queue.push(node.right);
+      }
+      callback(node);
+      levelOrderForEach(callback, queue);
+    }
+
     const printTree = (node = root, prefix = '', isLeft = true) => {
       if (node === null) {
         return;
@@ -79,6 +97,7 @@ export function createTree(array) {
         insert,
         deleteItem,
         find,
+        levelOrderForEach,
         printTree,
     }
 }
