@@ -80,6 +80,42 @@ export function createTree(array) {
       levelOrderForEach(callback, queue);
     }
 
+    function inOrderForEach(callback = null, node = root) {
+      if (callback === null) {
+        return;
+      }
+      if (node === null) {
+        return;
+      }
+      inOrderForEach(callback, node.left);
+      callback(node);
+      inOrderForEach(callback, node.right);
+    }
+
+    function preOrderForEach(callback = null, node = root) {
+      if (callback === null) {
+        return;
+      }
+      if (node === null) {
+        return;
+      }
+      callback(node);
+      preOrderForEach(callback, node.left);
+      preOrderForEach(callback, node.right);
+    }
+
+    function postOrderForEach(callback = null, node = root) {
+      if (callback === null) {
+        return;
+      }
+      if (node === null) {
+        return;
+      }
+      postOrderForEach(callback, node.left);
+      postOrderForEach(callback, node.right);
+      callback(node);
+    }
+
     const printTree = (node = root, prefix = '', isLeft = true) => {
       if (node === null) {
         return;
@@ -98,6 +134,9 @@ export function createTree(array) {
         deleteItem,
         find,
         levelOrderForEach,
+        inOrderForEach,
+        preOrderForEach,
+        postOrderForEach,
         printTree,
     }
 }
