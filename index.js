@@ -7,6 +7,8 @@ tree.insert(1);
 tree.insert(7);
 tree.insert(5);
 tree.insert(-1);
+console.log("height: " + tree.height(0));
+console.log("depth: " + tree.depth(3));
 //tree.levelOrderForEach((node) => console.log(node.data));
 tree.postOrderForEach((node) => console.log(node.data));
 //tree.deleteItem(4);

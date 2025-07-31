@@ -116,6 +116,28 @@ export function createTree(array) {
       callback(node);
     }
 
+    function height(value, node = find(value)) {
+      if (node === null) {
+        return -1;
+      }
+      let left = height(value, node.left);
+      let right = height(value, node.right);
+
+      return 1 + Math.max(left, right);
+    }
+
+    function depth(value, node = root) {
+      if (node === null || node.data === value) {
+        return 0;
+      }
+      if (value < node.data) {
+        return 1 + depth(value, node.left);
+      }
+      if (value > node.data) {
+        return 1 + depth(value, node.right);
+      }
+    }
+
     const printTree = (node = root, prefix = '', isLeft = true) => {
       if (node === null) {
         return;
@@ -137,6 +159,8 @@ export function createTree(array) {
         inOrderForEach,
         preOrderForEach,
         postOrderForEach,
+        height,
+        depth,
         printTree,
     }
 }
