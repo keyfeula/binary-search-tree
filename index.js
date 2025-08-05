@@ -1,15 +1,13 @@
 import { createTree } from "./tree.js";
 
-let tree = createTree([2, 3]);
-tree.insert(4);
-tree.insert(0);
-tree.insert(1);
-tree.insert(7);
-tree.insert(5);
-tree.insert(-1);
-console.log("height: " + tree.height(0));
-console.log("depth: " + tree.depth(3));
-//tree.levelOrderForEach((node) => console.log(node.data));
-tree.postOrderForEach((node) => console.log(node.data));
-//tree.deleteItem(4);
+let tree = createTree([60, 40, 20, 35, 90, 22, 17, 65, 92, 7, 19, 28]);
+console.log(tree.isBalanced());
+tree.printTree();
+tree.insert(120);
+tree.insert(140);
+tree.insert(109);
+tree.insert(183);
+console.log(tree.isBalanced());
+tree.rebalance();
+console.log(tree.isBalanced());
 tree.printTree();

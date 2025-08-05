@@ -1,6 +1,6 @@
 import { createNode } from "./node.js";
 
-export function createTree(array) {
+export function createTree(array = []) {
 
     array = [...new Set(array)];
     let root = buildTree(array);
@@ -138,6 +138,36 @@ export function createTree(array) {
       }
     }
 
+    function isBalanced(node = root) {
+      if (node === null) {
+        return 0;
+      }
+
+      let leftHeight = isBalanced(node.left)
+      if (leftHeight === -1){
+        return -1;
+      }
+
+      let rightHeight = isBalanced(node.right)
+      if (rightHeight === -1) {
+        return -1;
+      }
+
+      if (Math.abs(leftHeight - rightHeight) > 1) {
+        return -1;
+      }
+
+      return 1 + Math.max(leftHeight, rightHeight);
+    }
+
+    function rebalance() {
+      let newArray = [];
+      inOrderForEach((node) => {
+        newArray.push(node.data);
+      });
+      root = buildTree(newArray);
+    }
+
     const printTree = (node = root, prefix = '', isLeft = true) => {
       if (node === null) {
         return;
@@ -161,6 +191,8 @@ export function createTree(array) {
         postOrderForEach,
         height,
         depth,
+        isBalanced,
+        rebalance,
         printTree,
     }
 }
